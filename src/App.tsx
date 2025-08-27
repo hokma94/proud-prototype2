@@ -111,7 +111,7 @@ export default function App() {
   // 스플래시 화면
   if (currentScreen === 'splash') {
     return (
-      <div className="h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">
+      <div className="mobile-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">
         <div className="text-center">
           <div className="mb-8">
             <Brain className="w-24 h-24 text-blue-600 mx-auto mb-4" />
@@ -147,7 +147,7 @@ export default function App() {
     ];
 
     return (
-      <div className="h-screen bg-white flex flex-col">
+      <div className="mobile-h-screen bg-white flex flex-col">
         <div className="flex-1 flex items-center justify-center p-6">
           <div className="text-center max-w-sm">
             <div className="mb-8">
@@ -162,7 +162,7 @@ export default function App() {
           </div>
         </div>
         
-        <div className="p-6 space-y-4">
+        <div className="p-6 space-y-4 safe-area-bottom">
           <div className="flex justify-center space-x-2 mb-6">
             {[0, 1, 2].map((step) => (
               <div
@@ -195,7 +195,7 @@ export default function App() {
   // 권한 설정 화면
   if (currentScreen === 'permissions') {
     return (
-      <div className="h-screen bg-white flex flex-col">
+      <div className="mobile-h-screen bg-white flex flex-col">
         <div className="p-6 flex-1">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">설정을 확인해주세요</h2>
           
@@ -249,7 +249,7 @@ export default function App() {
           </div>
         </div>
 
-        <div className="p-6">
+        <div className="p-6 safe-area-bottom">
           <Button
             onClick={() => setCurrentScreen('home')}
             className="w-full h-14 text-lg"
@@ -314,7 +314,7 @@ export default function App() {
     const headerMessage = getHomeHeaderMessage(dailyProgress);
     
     return (
-      <div className="h-screen bg-gray-50 flex flex-col">
+      <div className="mobile-h-screen bg-gray-50 flex flex-col">
         <div className="bg-white p-4 shadow-sm">
           <div className="flex items-center justify-between">
             <div>

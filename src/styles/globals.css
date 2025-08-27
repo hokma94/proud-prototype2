@@ -187,3 +187,70 @@
 html {
   font-size: var(--font-size);
 }
+
+/* Mobile Viewport Height Fixes */
+@supports (-webkit-touch-callout: none) {
+  /* iOS Safari */
+  .h-screen {
+    height: -webkit-fill-available;
+  }
+  
+  .min-h-screen {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Safe Area Insets for iPhone */
+.safe-area-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-area-left {
+  padding-left: env(safe-area-inset-left);
+}
+
+.safe-area-right {
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Mobile-specific height adjustments */
+@media screen and (max-width: 768px) {
+  .mobile-h-screen {
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height */
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+  
+  .mobile-min-h-screen {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+  
+  /* Ensure content doesn't get cut off by mobile UI */
+  .mobile-content {
+    padding-bottom: calc(env(safe-area-inset-bottom) + 80px); /* Extra space for GNB */
+  }
+  
+  /* Onboarding specific adjustments */
+  .onboarding-content {
+    min-height: calc(100vh - 120px); /* Account for header and bottom button */
+    min-height: calc(100dvh - 120px);
+    padding-bottom: calc(env(safe-area-inset-bottom) + 100px);
+  }
+}
+
+/* Fix for Chrome mobile viewport height */
+@supports (height: 100dvh) {
+  .h-screen {
+    height: 100dvh;
+  }
+  
+  .min-h-screen {
+    min-height: 100dvh;
+  }
+}
