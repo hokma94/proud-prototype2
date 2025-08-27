@@ -604,9 +604,9 @@ export default function App() {
   // 드로잉 달력 화면 (추가)
   if (currentScreen === 'drawing-calendar') {
     return (
-      <div className="mobile-h-screen bg-white flex flex-col">
+      <div className="mobile-app-layout bg-white">
         {/* 헤더 - 고정 */}
-        <div className="p-4 border-b flex-shrink-0">
+        <div className="mobile-header p-4 border-b">
           <div className="flex items-center justify-between">
             <Button variant="ghost" onClick={() => setCurrentScreen('drawing-menu')}>
               ← 뒤로
@@ -617,7 +617,7 @@ export default function App() {
         </div>
 
         {/* 콘텐츠 영역 - 스크롤 가능 */}
-        <div className="flex-1 p-4 space-y-6 overflow-y-auto pb-20">
+        <div className="mobile-content p-4 space-y-6">
           <div className="text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">2024년 12월</h2>
             <p className="text-gray-600">이번 달 드로잉 활동을 확인해보세요</p>
@@ -1129,9 +1129,9 @@ export default function App() {
   // 주간 리포트 화면
   if (currentScreen === 'weekly-report') {
     return (
-      <div className="mobile-h-screen bg-white flex flex-col">
+      <div className="mobile-app-layout bg-white">
         {/* 헤더 - 고정 */}
-        <div className="p-4 border-b flex-shrink-0">
+        <div className="mobile-header p-4 border-b">
           <div className="flex items-center justify-between">
             <Button variant="ghost" onClick={() => setCurrentScreen('home')}>
               ← 뒤로
@@ -1144,7 +1144,7 @@ export default function App() {
         </div>
 
         {/* 콘텐츠 영역 - 스크롤 가능 */}
-        <div className="flex-1 p-4 space-y-6 overflow-y-auto pb-20">
+        <div className="mobile-content p-4 space-y-6">
           {/* 전체 인지 점수 */}
           <Card className="bg-gradient-to-br from-blue-50 to-purple-50 border-2 border-blue-200">
             <CardContent className="p-6">
@@ -1290,14 +1290,14 @@ export default function App() {
   // 설정 화면
   if (currentScreen === 'settings') {
     return (
-      <div className="mobile-h-screen bg-white flex flex-col">
+      <div className="mobile-app-layout bg-white">
         {/* 헤더 - 고정 */}
-        <div className="p-4 border-b flex-shrink-0">
+        <div className="mobile-header p-4 border-b">
           <h1 className="text-xl font-bold text-center">설정</h1>
         </div>
 
         {/* 콘텐츠 영역 - 스크롤 가능 */}
-        <div className="flex-1 p-4 space-y-4 overflow-y-auto pb-20">
+        <div className="mobile-content p-4 space-y-4">
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
@@ -1545,9 +1545,9 @@ export default function App() {
   // 게임 메뉴 화면
   if (currentScreen === 'game-menu') {
     return (
-      <div className="mobile-h-screen bg-white flex flex-col">
+      <div className="mobile-app-layout bg-white">
         {/* 헤더 - 고정 */}
-        <div className="p-4 border-b flex-shrink-0">
+        <div className="mobile-header p-4 border-b">
           <div className="flex items-center justify-between">
             <h1 className="text-xl font-bold">게임 센터</h1>
             <div className="flex items-center space-x-2">
@@ -1563,7 +1563,7 @@ export default function App() {
         </div>
 
         {/* 콘텐츠 영역 - 스크롤 가능 */}
-        <div className="flex-1 p-4 space-y-4 overflow-y-auto pb-20">
+        <div className="mobile-content p-4 space-y-4">
           <div>
             <h3 className="font-medium mb-3">인지 강화 게임</h3>
             <div className="grid grid-cols-2 gap-3">
@@ -1672,9 +1672,9 @@ export default function App() {
     }
 
     return (
-      <div className="mobile-h-screen bg-white flex flex-col">
+      <div className="mobile-app-layout bg-white">
         {/* 헤더 - 고정 */}
-        <div className="p-4 border-b flex-shrink-0">
+        <div className="mobile-header p-4 border-b">
           <div className="flex items-center justify-between">
             <Button variant="ghost" onClick={() => setCurrentScreen('game-menu')}>
               ← 뒤로
@@ -1688,7 +1688,7 @@ export default function App() {
         </div>
 
         {/* 콘텐츠 영역 - 스크롤 가능 */}
-        <div className="flex-1 p-4 space-y-6 overflow-y-auto pb-20">
+        <div className="mobile-content p-4 space-y-6">
           <Card className={`border-2 ${game.color.replace('bg-', 'border-').replace('-500', '-200')} ${game.color.replace('bg-', 'bg-').replace('-500', '-50')}`}>
             <CardContent className="p-6">
               <div className="flex items-center space-x-4 mb-4">
