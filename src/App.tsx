@@ -108,20 +108,22 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
+  // 네비게이션이 있는 화면들 (GNB 표시)
+  const screensWithNavigation = ['home', 'drawing-menu', 'game-menu', 'weekly-report', 'settings'];
+  const hasNavigation = screensWithNavigation.includes(currentScreen);
+
   // 스플래시 화면
   if (currentScreen === 'splash') {
     return (
-      <div className="mobile-app-layout bg-gradient-to-br from-blue-50 to-purple-50">
-        <div className="flex-1 flex items-center justify-center p-4">
-          <div className="text-center">
-            <div className="mb-8">
-              <Brain className="w-24 h-24 text-blue-600 mx-auto mb-4" />
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">Proud100</h1>
-              <p className="text-lg text-gray-600">하루 10분, 두뇌 스트레칭</p>
-            </div>
-            <div className="animate-pulse">
-              <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
-            </div>
+      <div className="h-dvh bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">
+        <div className="text-center">
+          <div className="mb-8">
+            <Brain className="w-24 h-24 text-blue-600 mx-auto mb-4" />
+            <h1 className="text-4xl font-bold text-gray-900 mb-2">Proud100</h1>
+            <p className="text-lg text-gray-600">하루 10분, 두뇌 스트레칭</p>
+          </div>
+          <div className="animate-pulse">
+            <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
           </div>
         </div>
       </div>
@@ -149,8 +151,8 @@ export default function App() {
     ];
 
     return (
-      <div className="mobile-app-layout bg-white">
-        <div className="mobile-content flex items-center justify-center p-6">
+      <div className="h-dvh bg-white flex flex-col">
+        <div className="flex-1 flex items-center justify-center p-6">
           <div className="text-center max-w-sm">
             <div className="mb-8">
               {onboardingData[onboardingStep].icon}
@@ -164,7 +166,7 @@ export default function App() {
           </div>
         </div>
         
-        <div className="mobile-header p-6 space-y-4">
+        <div className="flex-shrink-0 p-6 space-y-4">
           <div className="flex justify-center space-x-2 mb-6">
             {[0, 1, 2].map((step) => (
               <div
@@ -197,8 +199,8 @@ export default function App() {
   // 권한 설정 화면
   if (currentScreen === 'permissions') {
     return (
-      <div className="mobile-app-layout bg-white">
-        <div className="mobile-header p-6">
+      <div className="h-dvh bg-white flex flex-col">
+        <div className="flex-1 p-6 overflow-y-auto">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">설정을 확인해주세요</h2>
           
           <div className="space-y-6">
@@ -251,7 +253,7 @@ export default function App() {
           </div>
         </div>
 
-        <div className="mobile-content p-6">
+        <div className="flex-shrink-0 p-6">
           <Button
             onClick={() => setCurrentScreen('home')}
             className="w-full h-14 text-lg"
@@ -316,9 +318,8 @@ export default function App() {
     const headerMessage = getHomeHeaderMessage(dailyProgress);
     
     return (
-      <div className="mobile-app-layout bg-gray-50">
-        {/* 헤더 - 고정 */}
-        <div className="mobile-header bg-white p-4 shadow-sm">
+      <div className="h-dvh bg-gray-50 flex flex-col">
+        <div className="flex-shrink-0 bg-white p-4 shadow-sm">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-xl font-bold text-gray-900">{headerMessage.title}</h1>
@@ -340,8 +341,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* 콘텐츠 영역 - 스크롤 가능 */}
-        <div className="mobile-content p-4 space-y-6">
+        <div className="flex-1 overflow-y-auto p-4 space-y-6" style={{ paddingBottom: hasNavigation ? '88px' : '16px' }}>
           <Card className="border-2 border-blue-200 bg-blue-50">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
@@ -474,9 +474,8 @@ export default function App() {
   // 드로잉 메뉴 화면
   if (currentScreen === 'drawing-menu') {
     return (
-      <div className="mobile-app-layout bg-white">
-        {/* 헤더 - 고정 */}
-        <div className="mobile-header p-4 border-b">
+      <div className="h-dvh bg-white flex flex-col">
+        <div className="flex-shrink-0 p-4 border-b">
           <div className="flex items-center justify-between">
             <h1 className="text-xl font-bold">드로잉 스튜디오</h1>
             <div className="flex items-center space-x-2">
@@ -491,8 +490,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* 콘텐츠 영역 - 스크롤 가능 */}
-        <div className="mobile-content p-4 space-y-4">
+        <div className="flex-1 overflow-y-auto p-4 space-y-4" style={{ paddingBottom: hasNavigation ? '88px' : '16px' }}>
           {/* 오늘의 데일리 미션 */}
           <Card className="border-2 border-blue-200 bg-blue-50">
             <CardContent className="p-4">
@@ -601,12 +599,11 @@ export default function App() {
     );
   }
 
-  // 드로잉 달력 화면 (추가)
+  // 드로잉 달력 화면
   if (currentScreen === 'drawing-calendar') {
     return (
-      <div className="mobile-app-layout bg-white">
-        {/* 헤더 - 고정 */}
-        <div className="mobile-header p-4 border-b">
+      <div className="h-dvh bg-white flex flex-col">
+        <div className="flex-shrink-0 p-4 border-b">
           <div className="flex items-center justify-between">
             <Button variant="ghost" onClick={() => setCurrentScreen('drawing-menu')}>
               ← 뒤로
@@ -616,8 +613,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* 콘텐츠 영역 - 스크롤 가능 */}
-        <div className="mobile-content p-4 space-y-6">
+        <div className="flex-1 overflow-y-auto p-4 space-y-6">
           <div className="text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">2024년 12월</h2>
             <p className="text-gray-600">이번 달 드로잉 활동을 확인해보세요</p>
@@ -694,11 +690,11 @@ export default function App() {
     );
   }
 
-  // 드로잉 프리미엄 팩 구매 화면 (추가)
+  // 드로잉 프리미엄 팩 구매 화면
   if (currentScreen === 'premium-pack') {
     return (
-      <div className="h-screen bg-white flex flex-col">
-        <div className="p-4 border-b">
+      <div className="h-dvh bg-white flex flex-col">
+        <div className="flex-shrink-0 p-4 border-b">
           <div className="flex items-center justify-between">
             <Button variant="ghost" onClick={() => setCurrentScreen('drawing-menu')}>
               ← 뒤로
@@ -708,7 +704,7 @@ export default function App() {
           </div>
         </div>
 
-        <div className="flex-1 p-4 space-y-6">
+        <div className="flex-1 overflow-y-auto p-4 space-y-6">
           <div className="text-center">
             <Brush className="w-16 h-16 text-blue-600 mx-auto mb-4" />
             <h2 className="text-2xl font-bold text-gray-900 mb-2">인지 강화 드로잉</h2>
@@ -805,11 +801,11 @@ export default function App() {
     );
   }
 
-  // 게임 프리미엄 팩 구매 화면 (추가)
+  // 게임 프리미엄 팩 구매 화면
   if (currentScreen === 'game-premium-pack') {
     return (
-      <div className="h-screen bg-white flex flex-col">
-        <div className="p-4 border-b">
+      <div className="h-dvh bg-white flex flex-col">
+        <div className="flex-shrink-0 p-4 border-b">
           <div className="flex items-center justify-between">
             <Button variant="ghost" onClick={() => setCurrentScreen('game-menu')}>
               ← 뒤로
@@ -819,7 +815,7 @@ export default function App() {
           </div>
         </div>
 
-        <div className="flex-1 p-4 space-y-6">
+        <div className="flex-1 overflow-y-auto p-4 space-y-6">
           <div className="text-center">
             <Crown className="w-16 h-16 text-yellow-600 mx-auto mb-4" />
             <h2 className="text-2xl font-bold text-gray-900 mb-2">인지 강화 게임팩</h2>
@@ -909,11 +905,11 @@ export default function App() {
     );
   }
 
-  // 리더보드 화면 (추가)
+  // 리더보드 화면
   if (currentScreen === 'leaderboard') {
     return (
-      <div className="h-screen bg-white flex flex-col">
-        <div className="p-4 border-b">
+      <div className="h-dvh bg-white flex flex-col">
+        <div className="flex-shrink-0 p-4 border-b">
           <div className="flex items-center justify-between">
             <Button variant="ghost" onClick={() => setCurrentScreen('game-menu')}>
               ← 뒤로
@@ -926,7 +922,7 @@ export default function App() {
           </div>
         </div>
 
-        <div className="flex-1 p-4 space-y-6">
+        <div className="flex-1 overflow-y-auto p-4 space-y-6">
           <div className="text-center">
             <Trophy className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
             <h2 className="text-2xl font-bold text-gray-900 mb-2">메모리 매치 순위표</h2>
@@ -1014,7 +1010,7 @@ export default function App() {
           </Card>
         </div>
 
-        <div className="p-4">
+        <div className="flex-shrink-0 p-4">
           <Button
             onClick={() => setCurrentScreen('game-play')}
             className="w-full h-12 text-lg"
@@ -1030,9 +1026,9 @@ export default function App() {
   // 드로잉 캔버스 화면
   if (currentScreen === 'drawing-canvas') {
     return (
-      <div className="h-screen bg-gray-100 flex flex-col">
+      <div className="h-dvh bg-gray-100 flex flex-col">
         {/* 상단 컨트롤 */}
-        <div className="bg-white p-4 shadow-sm">
+        <div className="flex-shrink-0 bg-white p-4 shadow-sm">
           <div className="flex items-center justify-between">
             <Button variant="ghost" onClick={() => setCurrentScreen('drawing-guide')}>
               ← 돌아가기
@@ -1098,7 +1094,7 @@ export default function App() {
         </div>
 
         {/* 하단 도구 */}
-        <div className="bg-white p-4 border-t">
+        <div className="flex-shrink-0 bg-white p-4 border-t">
           <div className="flex justify-between items-center">
             <div className="flex space-x-2">
               <Button variant="outline" className="w-12 h-12 rounded-full bg-black"></Button>
@@ -1129,9 +1125,8 @@ export default function App() {
   // 주간 리포트 화면
   if (currentScreen === 'weekly-report') {
     return (
-      <div className="mobile-app-layout bg-white">
-        {/* 헤더 - 고정 */}
-        <div className="mobile-header p-4 border-b">
+      <div className="h-dvh bg-white flex flex-col">
+        <div className="flex-shrink-0 p-4 border-b">
           <div className="flex items-center justify-between">
             <Button variant="ghost" onClick={() => setCurrentScreen('home')}>
               ← 뒤로
@@ -1143,8 +1138,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* 콘텐츠 영역 - 스크롤 가능 */}
-        <div className="mobile-content p-4 space-y-6">
+        <div className="flex-1 overflow-y-auto p-4 space-y-6" style={{ paddingBottom: hasNavigation ? '88px' : '16px' }}>
           {/* 전체 인지 점수 */}
           <Card className="bg-gradient-to-br from-blue-50 to-purple-50 border-2 border-blue-200">
             <CardContent className="p-6">
@@ -1290,14 +1284,12 @@ export default function App() {
   // 설정 화면
   if (currentScreen === 'settings') {
     return (
-      <div className="mobile-app-layout bg-white">
-        {/* 헤더 - 고정 */}
-        <div className="mobile-header p-4 border-b">
+      <div className="h-dvh bg-white flex flex-col">
+        <div className="flex-shrink-0 p-4 border-b">
           <h1 className="text-xl font-bold text-center">설정</h1>
         </div>
 
-        {/* 콘텐츠 영역 - 스크롤 가능 */}
-        <div className="mobile-content p-4 space-y-4">
+        <div className="flex-1 overflow-y-auto p-4 space-y-4" style={{ paddingBottom: hasNavigation ? '88px' : '16px' }}>
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
@@ -1426,8 +1418,8 @@ export default function App() {
     ];
 
     return (
-      <div className="h-screen bg-gradient-to-br from-purple-50 to-pink-50 flex flex-col">
-        <div className="bg-white p-4 shadow-sm">
+      <div className="h-dvh bg-gradient-to-br from-purple-50 to-pink-50 flex flex-col">
+        <div className="flex-shrink-0 bg-white p-4 shadow-sm">
           <div className="flex items-center justify-between">
             <Button variant="ghost" onClick={() => setCurrentScreen('game-start')}>
               ← 돌아가기
@@ -1483,7 +1475,7 @@ export default function App() {
           </div>
         </div>
 
-        <div className="p-4">
+        <div className="flex-shrink-0 p-4">
           <Button
             onClick={() => {
               setDailyProgress(prev => ({ ...prev, game: true }));
@@ -1502,8 +1494,8 @@ export default function App() {
   // 게임 시작 화면
   if (currentScreen === 'game-start') {
     return (
-      <div className="h-screen bg-white flex flex-col">
-        <div className="p-4 border-b">
+      <div className="h-dvh bg-white flex flex-col">
+        <div className="flex-shrink-0 p-4 border-b">
           <Button variant="ghost" onClick={() => setCurrentScreen('home')}>
             ← 뒤로
           </Button>
@@ -1530,7 +1522,7 @@ export default function App() {
           </div>
         </div>
 
-        <div className="p-6">
+        <div className="flex-shrink-0 p-6">
           <Button
             onClick={() => setCurrentScreen('game-play')}
             className="w-full h-14 text-lg"
@@ -1545,9 +1537,8 @@ export default function App() {
   // 게임 메뉴 화면
   if (currentScreen === 'game-menu') {
     return (
-      <div className="mobile-app-layout bg-white">
-        {/* 헤더 - 고정 */}
-        <div className="mobile-header p-4 border-b">
+      <div className="h-dvh bg-white flex flex-col">
+        <div className="flex-shrink-0 p-4 border-b">
           <div className="flex items-center justify-between">
             <h1 className="text-xl font-bold">게임 센터</h1>
             <div className="flex items-center space-x-2">
@@ -1562,8 +1553,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* 콘텐츠 영역 - 스크롤 가능 */}
-        <div className="mobile-content p-4 space-y-4">
+        <div className="flex-1 overflow-y-auto p-4 space-y-4" style={{ paddingBottom: hasNavigation ? '88px' : '16px' }}>
           <div>
             <h3 className="font-medium mb-3">인지 강화 게임</h3>
             <div className="grid grid-cols-2 gap-3">
@@ -1672,13 +1662,12 @@ export default function App() {
     }
 
     return (
-      <div className="mobile-app-layout bg-white">
-        {/* 헤더 - 고정 */}
-        <div className="mobile-header p-4 border-b">
+      <div className="h-dvh bg-white flex flex-col">
+        <div className="flex-shrink-0 p-4 border-b">
           <div className="flex items-center justify-between">
             <Button variant="ghost" onClick={() => setCurrentScreen('game-menu')}>
               ← 뒤로
-              </Button>
+            </Button>
             <h1 className="text-xl font-bold">{game.name}</h1>
             <div className="flex items-center space-x-1 bg-red-100 px-3 py-1 rounded-full">
               <Heart className="w-4 h-4 text-red-500" />
@@ -1687,8 +1676,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* 콘텐츠 영역 - 스크롤 가능 */}
-        <div className="mobile-content p-4 space-y-6">
+        <div className="flex-1 overflow-y-auto p-4 space-y-6">
           <Card className={`border-2 ${game.color.replace('bg-', 'border-').replace('-500', '-200')} ${game.color.replace('bg-', 'bg-').replace('-500', '-50')}`}>
             <CardContent className="p-6">
               <div className="flex items-center space-x-4 mb-4">
@@ -1764,7 +1752,7 @@ export default function App() {
           </Card>
         </div>
 
-        <div className="p-4 space-y-3">
+        <div className="flex-shrink-0 p-4 space-y-3">
           <Button
             onClick={() => setCurrentScreen('game-start')}
             className="w-full h-12 text-lg"
@@ -1783,11 +1771,11 @@ export default function App() {
     );
   }
 
-  // 나머지 간단한 화면들은 그대로 유지
+  // 나머지 간단한 화면들
   if (currentScreen === 'drawing-guide') {
     return (
-      <div className="h-screen bg-white flex flex-col">
-        <div className="p-4 border-b">
+      <div className="h-dvh bg-white flex flex-col">
+        <div className="flex-shrink-0 p-4 border-b">
           <Button variant="ghost" onClick={() => setCurrentScreen('home')}>
             ← 뒤로
           </Button>
@@ -1814,7 +1802,7 @@ export default function App() {
           </div>
         </div>
 
-        <div className="p-6">
+        <div className="flex-shrink-0 p-6">
           <Button
             onClick={() => setCurrentScreen('drawing-canvas')}
             className="w-full h-14 text-lg"
@@ -1828,7 +1816,7 @@ export default function App() {
 
   if (currentScreen === 'drawing-complete') {
     return (
-      <div className="h-screen bg-gradient-to-br from-green-50 to-blue-50 flex flex-col items-center justify-center p-6">
+      <div className="h-dvh bg-gradient-to-br from-green-50 to-blue-50 flex flex-col items-center justify-center p-6">
         <div className="text-center">
           <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
             <CheckCircle className="w-12 h-12 text-white" />
@@ -1884,7 +1872,7 @@ export default function App() {
 
   if (currentScreen === 'reward') {
     return (
-      <div className="h-screen bg-gradient-to-br from-yellow-50 to-orange-50 flex flex-col items-center justify-center p-6">
+      <div className="h-dvh bg-gradient-to-br from-yellow-50 to-orange-50 flex flex-col items-center justify-center p-6">
         <div className="text-center">
           <div className="relative mb-8">
             <div className="w-24 h-24 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mx-auto">
@@ -1944,7 +1932,7 @@ export default function App() {
   }
 
   return (
-    <div className="h-screen bg-white flex items-center justify-center">
+    <div className="h-dvh bg-white flex items-center justify-center">
       <p className="text-gray-500">화면을 구현 중입니다...</p>
     </div>
   );
