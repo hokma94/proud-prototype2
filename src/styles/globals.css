@@ -188,19 +188,53 @@ html {
   font-size: var(--font-size);
 }
 
-/* Mobile Viewport Height Fixes */
+/* Mobile App Layout - Fixed GNB with Scrollable Content */
+.mobile-app-layout {
+  height: 100vh;
+  height: 100dvh; /* Dynamic viewport height for mobile */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Prevent body scroll */
+}
+
+.mobile-header {
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: white;
+}
+
+.mobile-content {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 80px; /* Space for GNB */
+  -webkit-overflow-scrolling: touch; /* Smooth iOS scroll */
+}
+
+.mobile-gnb {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background: white;
+  border-top: 1px solid #e5e7eb;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* iOS Safari specific fixes */
 @supports (-webkit-touch-callout: none) {
-  /* iOS Safari */
-  .h-screen {
+  .mobile-app-layout {
     height: -webkit-fill-available;
   }
   
-  .min-h-screen {
-    min-height: -webkit-fill-available;
+  .mobile-content {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom));
   }
 }
 
-/* Safe Area Insets for iPhone */
+/* Safe area support */
 .safe-area-top {
   padding-top: env(safe-area-inset-top);
 }
@@ -209,48 +243,9 @@ html {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-.safe-area-left {
-  padding-left: env(safe-area-inset-left);
-}
-
-.safe-area-right {
-  padding-right: env(safe-area-inset-right);
-}
-
-/* Mobile-specific height adjustments */
-@media screen and (max-width: 768px) {
-  .mobile-h-screen {
-    height: 100vh;
-    height: 100dvh; /* Dynamic viewport height */
-    min-height: 100vh;
-    min-height: 100dvh;
-  }
-  
-  .mobile-min-h-screen {
-    min-height: 100vh;
-    min-height: 100dvh;
-  }
-  
-  /* Ensure content doesn't get cut off by mobile UI */
-  .mobile-content {
-    padding-bottom: calc(env(safe-area-inset-bottom) + 80px); /* Extra space for GNB */
-  }
-  
-  /* Onboarding specific adjustments */
-  .onboarding-content {
-    min-height: calc(100vh - 120px); /* Account for header and bottom button */
-    min-height: calc(100dvh - 120px);
-    padding-bottom: calc(env(safe-area-inset-bottom) + 100px);
-  }
-}
-
-/* Fix for Chrome mobile viewport height */
-@supports (height: 100dvh) {
-  .h-screen {
-    height: 100dvh;
-  }
-  
-  .min-h-screen {
-    min-height: 100dvh;
-  }
+/* Remove old mobile height classes */
+.mobile-h-screen,
+.mobile-min-h-screen {
+  height: 100vh;
+  height: 100dvh;
 }

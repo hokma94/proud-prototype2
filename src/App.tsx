@@ -111,15 +111,17 @@ export default function App() {
   // 스플래시 화면
   if (currentScreen === 'splash') {
     return (
-      <div className="mobile-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">
-        <div className="text-center">
-          <div className="mb-8">
-            <Brain className="w-24 h-24 text-blue-600 mx-auto mb-4" />
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">Proud100</h1>
-            <p className="text-lg text-gray-600">하루 10분, 두뇌 스트레칭</p>
-          </div>
-          <div className="animate-pulse">
-            <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+      <div className="mobile-app-layout bg-gradient-to-br from-blue-50 to-purple-50">
+        <div className="flex-1 flex items-center justify-center p-4">
+          <div className="text-center">
+            <div className="mb-8">
+              <Brain className="w-24 h-24 text-blue-600 mx-auto mb-4" />
+              <h1 className="text-4xl font-bold text-gray-900 mb-2">Proud100</h1>
+              <p className="text-lg text-gray-600">하루 10분, 두뇌 스트레칭</p>
+            </div>
+            <div className="animate-pulse">
+              <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -147,8 +149,8 @@ export default function App() {
     ];
 
     return (
-      <div className="mobile-h-screen bg-white flex flex-col">
-        <div className="flex-1 flex items-center justify-center p-6 pb-20">
+      <div className="mobile-app-layout bg-white">
+        <div className="mobile-content flex items-center justify-center p-6">
           <div className="text-center max-w-sm">
             <div className="mb-8">
               {onboardingData[onboardingStep].icon}
@@ -162,7 +164,7 @@ export default function App() {
           </div>
         </div>
         
-        <div className="p-6 space-y-4 safe-area-bottom">
+        <div className="mobile-header p-6 space-y-4">
           <div className="flex justify-center space-x-2 mb-6">
             {[0, 1, 2].map((step) => (
               <div
@@ -195,8 +197,8 @@ export default function App() {
   // 권한 설정 화면
   if (currentScreen === 'permissions') {
     return (
-      <div className="mobile-h-screen bg-white flex flex-col">
-        <div className="p-6 flex-1">
+      <div className="mobile-app-layout bg-white">
+        <div className="mobile-header p-6">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">설정을 확인해주세요</h2>
           
           <div className="space-y-6">
@@ -249,7 +251,7 @@ export default function App() {
           </div>
         </div>
 
-        <div className="p-6 safe-area-bottom">
+        <div className="mobile-content p-6">
           <Button
             onClick={() => setCurrentScreen('home')}
             className="w-full h-14 text-lg"
@@ -314,9 +316,9 @@ export default function App() {
     const headerMessage = getHomeHeaderMessage(dailyProgress);
     
     return (
-      <div className="mobile-h-screen bg-gray-50 flex flex-col">
+      <div className="mobile-app-layout bg-gray-50">
         {/* 헤더 - 고정 */}
-        <div className="bg-white p-4 shadow-sm flex-shrink-0">
+        <div className="mobile-header bg-white p-4 shadow-sm">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-xl font-bold text-gray-900">{headerMessage.title}</h1>
@@ -339,7 +341,7 @@ export default function App() {
         </div>
 
         {/* 콘텐츠 영역 - 스크롤 가능 */}
-        <div className="flex-1 p-4 space-y-6 overflow-y-auto pb-20">
+        <div className="mobile-content p-4 space-y-6">
           <Card className="border-2 border-blue-200 bg-blue-50">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
@@ -472,9 +474,9 @@ export default function App() {
   // 드로잉 메뉴 화면
   if (currentScreen === 'drawing-menu') {
     return (
-      <div className="mobile-h-screen bg-white flex flex-col">
+      <div className="mobile-app-layout bg-white">
         {/* 헤더 - 고정 */}
-        <div className="p-4 border-b flex-shrink-0">
+        <div className="mobile-header p-4 border-b">
           <div className="flex items-center justify-between">
             <h1 className="text-xl font-bold">드로잉 스튜디오</h1>
             <div className="flex items-center space-x-2">
@@ -490,7 +492,7 @@ export default function App() {
         </div>
 
         {/* 콘텐츠 영역 - 스크롤 가능 */}
-        <div className="flex-1 p-4 space-y-4 overflow-y-auto pb-20">
+        <div className="mobile-content p-4 space-y-4">
           {/* 오늘의 데일리 미션 */}
           <Card className="border-2 border-blue-200 bg-blue-50">
             <CardContent className="p-4">

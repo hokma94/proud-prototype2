@@ -16,7 +16,7 @@ export function NavigationBar({ currentScreen, onNavigate }: NavigationBarProps)
   ];
 
   return (
-    <div className="bg-white border-t p-2 safe-area-bottom">
+    <div className="mobile-gnb bg-white border-t p-2">
       <div className="flex justify-around">
         {navItems.map(({ id, label, icon: Icon }) => (
           <Button 
